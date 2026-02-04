@@ -48,6 +48,7 @@ android {
 }
 
 dependencies {
+
     // Define local variables for cleaner version access
     val hilt_version = libs.versions.hilt.get();
     val hilt_compose_version = libs.versions.hiltNavigationCompose.get()
