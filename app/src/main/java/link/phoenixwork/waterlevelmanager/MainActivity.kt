@@ -41,10 +41,7 @@ class MainActivity : ComponentActivity() {
             
             WaterLevelManagerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
-                    Text(sensor?.distance.toString());
-
-                    AppNavController(modifier = Modifier.padding(innerPadding))
+                    AppNavController(sensor, modifier = Modifier.padding(innerPadding))
                 }
             }
         }

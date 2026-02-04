@@ -5,11 +5,12 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import link.phoenixwork.waterlevelmanager.data.ui.Sensor
 import link.phoenixwork.waterlevelmanager.presentation.screens.LoginScreen
 import link.phoenixwork.waterlevelmanager.presentation.screens.WaterLevelDisplay
 
 @Composable
-fun AppNavController(modifier: Modifier) {
+fun AppNavController(sensor: Sensor?, modifier: Modifier) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "test") {
@@ -19,7 +20,7 @@ fun AppNavController(modifier: Modifier) {
             }
         }
         composable("test2") {
-            WaterLevelDisplay ("Second Screen",modifier){ id ->
+            WaterLevelDisplay ("Second Screen",sensor,modifier){ id ->
                 navController.navigate("test")
             }
         }
