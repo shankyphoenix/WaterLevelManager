@@ -15,7 +15,7 @@ class UserModule {
     @Singleton
     @Provides
     fun getRetrofitClient(): Retrofit = Retrofit.Builder()
-        .baseUrl("http://host4.phoenixwork.link:8080/app")
+        .baseUrl("http://host4.phoenixwork.link:8080/app/")
         .addConverterFactory( GsonConverterFactory.create())
         .build()
 

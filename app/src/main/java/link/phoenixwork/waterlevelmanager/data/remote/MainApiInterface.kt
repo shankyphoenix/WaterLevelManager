@@ -5,5 +5,5 @@ import retrofit2.http.GET
 
 interface MainApiInterface {
     @GET("get_distance")
-    suspend fun getUsers(): List<Sensor>
+    suspend fun getDistance(): Sensor
 }

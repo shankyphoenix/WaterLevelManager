@@ -1,5 +1,6 @@
 package link.phoenixwork.waterlevelmanager
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,12 +17,13 @@ class UserViewModel @Inject constructor(
     private val repo: SensorRepo
 ) : ViewModel() {
 
-    private val _users = MutableStateFlow<List<Sensor>>(emptyList())
-    val users: StateFlow<List<Sensor>> = _users
+    private val _sensor = MutableStateFlow<Sensor?>(null)
+    val sensor: StateFlow<Sensor?> = _sensor
 
     fun loadUsers() {
         viewModelScope.launch {
-            _users.value = repo.fetchUsers()
+            _sensor.value = repo.fetchUsers() // ✅ Sensor → Sensor?
+            Log.d("Shanky", _sensor.value.toString())
         }
     }
 }
