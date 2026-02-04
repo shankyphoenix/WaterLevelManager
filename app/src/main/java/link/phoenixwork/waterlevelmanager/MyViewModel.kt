@@ -6,8 +6,12 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import link.phoenixwork.waterlevelmanager.data.models.Sensor
+import link.phoenixwork.waterlevelmanager.data.ui.Login
+import link.phoenixwork.waterlevelmanager.data.ui.Sensor
+import link.phoenixwork.waterlevelmanager.events.LoginUiEvent
+
 import link.phoenixwork.waterlevelmanager.repo.SensorRepo
 import javax.inject.Inject
 
@@ -17,13 +21,31 @@ class UserViewModel @Inject constructor(
     private val repo: SensorRepo
 ) : ViewModel() {
 
-    private val _sensor = MutableStateFlow<Sensor?>(null)
+    private val _sensor = MutableStateFlow<Sensor>(Sensor())
+    private val _login = MutableStateFlow<Login>(Login())
     val sensor: StateFlow<Sensor?> = _sensor
 
     fun loadUsers() {
         viewModelScope.launch {
+            Log.d("Shanky", _sensor.value.toString())
             _sensor.value = repo.fetchUsers() // ✅ Sensor → Sensor?
             Log.d("Shanky", _sensor.value.toString())
+        }
+    }
+
+    fun onEvent(event: LoginUiEvent) {
+        when (event) {
+            is LoginUiEvent.EmailChanged -> {
+                // 🔹 update() = convenient way to change StateFlow state immutably
+                _login.update { it.copy(email = event.value, error = "") }
+            }
+
+            is LoginUiEvent.PasswordChanged -> {
+                _login.update { it.copy(password = event.value, error = "") }
+            }
+
+           // LoginUiEvent.LoginClicked -> login()
+            else -> {}
         }
     }
 }

@@ -1,6 +1,7 @@
 package link.phoenixwork.waterlevelmanager
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -10,9 +11,11 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import link.phoenixwork.waterlevelmanager.ui.theme.WaterLevelManagerTheme
 @AndroidEntryPoint
@@ -26,17 +29,22 @@ class MainActivity : ComponentActivity() {
 
             val vm: UserViewModel = hiltViewModel()
 
+            val sensor by vm.sensor.collectAsStateWithLifecycle()
+
+
             LaunchedEffect(Unit) {
+                Log.d("shanky-OnLaunched", sensor.toString());
                 vm.loadUsers() // 🔥 API call here
+                Log.d("shanky-OnLaunched", sensor.toString());
             }
 
             
             WaterLevelManagerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+
+                    Text(sensor?.distance.toString());
+
+                    AppNavController(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

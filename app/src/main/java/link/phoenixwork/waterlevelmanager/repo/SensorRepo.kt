@@ -1,7 +1,8 @@
 package link.phoenixwork.waterlevelmanager.repo
 
-import link.phoenixwork.waterlevelmanager.data.models.Sensor
+
 import link.phoenixwork.waterlevelmanager.data.remote.MainApiInterface
+import link.phoenixwork.waterlevelmanager.data.ui.Sensor
 import javax.inject.Inject
 
 
