@@ -3,11 +3,8 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
 
-    // Apply the Hilt plugin here (no version or apply false)
+    alias(libs.plugins.ksp)
     id("com.google.dagger.hilt.android")
-
-    // 2. Apply the KAPT plugin here (no version or apply false)
-    id("kotlin-kapt")
 }
 
 android {
@@ -39,8 +36,10 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        compilerOptions {
+            jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+        }
     }
     buildFeatures {
         compose = true
@@ -50,11 +49,7 @@ android {
 dependencies {
 
     implementation(libs.androidx.material3)
-    // Define local variables for cleaner version access
-    val hilt_version = libs.versions.hilt.get();
-    val hilt_compose_version = libs.versions.hiltNavigationCompose.get()
-    // The AndroidX Hilt Compiler version usually matches the navigation-compose version
-    val androidx_hilt_compiler_version = hilt_compose_version
+
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
@@ -72,22 +67,22 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 
-    implementation("com.google.dagger:hilt-android:$hilt_version")
-    kapt("com.google.dagger:hilt-compiler:$hilt_version") // or ksp()
+    // --- Hilt ---
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
 
-    // Hilt Extension for Jetpack Compose (for hiltViewModel())
-    implementation("androidx.hilt:hilt-navigation-compose:$hilt_compose_version")
+    // --- Room ---
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
 
-    implementation("androidx.navigation:navigation-compose:2.7.7")
-
-    // Optional: AndroidX Hilt Compiler (needed for @HiltViewModel if hilt-compiler doesn't cover it)
-    kapt("androidx.hilt:hilt-compiler:$androidx_hilt_compiler_version") // or ksp()
-
-
+    // --- Retrofit / OkHttp ---
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
-
-    // OkHttp
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
+    implementation(libs.androidx.navigation.compose)
+
+    implementation("androidx.hilt:hilt-navigation-compose:1.3.0")
 }

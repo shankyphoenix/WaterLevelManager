@@ -14,7 +14,8 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import link.phoenixwork.waterlevelmanager.ui.theme.WaterLevelManagerTheme
@@ -38,7 +39,12 @@ class MainActivity : ComponentActivity() {
                 Log.d("shanky-OnLaunched", sensor.toString());
             }
 
-            
+            LaunchedEffect(sensor) {
+                Log.d("sensor", sensor.toString())
+            }
+
+
+
             WaterLevelManagerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     AppNavController(sensor, modifier = Modifier.padding(innerPadding))
