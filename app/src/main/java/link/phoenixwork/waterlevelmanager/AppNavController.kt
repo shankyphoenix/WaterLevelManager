@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import link.phoenixwork.waterlevelmanager.data.ui.Sensor
+import link.phoenixwork.waterlevelmanager.data.remote.Sensor
 import link.phoenixwork.waterlevelmanager.presentation.screens.LoginScreen
 import link.phoenixwork.waterlevelmanager.presentation.screens.WaterLevelDisplay
 

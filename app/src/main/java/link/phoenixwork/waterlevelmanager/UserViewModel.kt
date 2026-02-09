@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 import link.phoenixwork.waterlevelmanager.data.ui.Login
-import link.phoenixwork.waterlevelmanager.data.ui.Sensor
+import link.phoenixwork.waterlevelmanager.data.remote.Sensor
 import link.phoenixwork.waterlevelmanager.events.LoginUiEvent
 
 import link.phoenixwork.waterlevelmanager.repo.SensorRepo
@@ -28,7 +28,7 @@ class UserViewModel @Inject constructor(
     val sensor: StateFlow<Sensor?> = _sensor
 
     init {
-        startAutoRefresh()
+       // startAutoRefresh()
     }
 
     private fun startAutoRefresh() {

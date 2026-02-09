@@ -1,4 +1,4 @@
-package link.phoenixwork.waterlevelmanager.data.ui
+package link.phoenixwork.waterlevelmanager.data.remote
 
 import com.google.gson.annotations.SerializedName
 import java.time.Instant

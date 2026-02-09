@@ -1,7 +1,6 @@
-package link.phoenixwork.waterlevelmanager.data.remote
+package link.phoenixwork.waterlevelmanager.domain.remote
 
-
-import link.phoenixwork.waterlevelmanager.data.ui.Sensor
+import link.phoenixwork.waterlevelmanager.data.remote.Sensor
 import retrofit2.http.GET
 
 interface MainApiInterface {

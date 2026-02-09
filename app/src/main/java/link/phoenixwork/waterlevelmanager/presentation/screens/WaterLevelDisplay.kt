@@ -1,5 +1,6 @@
 package link.phoenixwork.waterlevelmanager.presentation.screens
 
+import android.util.Log
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
@@ -11,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.geometry.Offset
@@ -20,10 +22,17 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import link.phoenixwork.waterlevelmanager.data.ui.Sensor
+import androidx.hilt.navigation.compose.hiltViewModel
+import link.phoenixwork.waterlevelmanager.WaterLevelViewModel
+import link.phoenixwork.waterlevelmanager.data.remote.Sensor
 
 @Composable
 fun WaterLevelDisplay(name: String, sensor: Sensor?, modifier: Modifier, onClick: (id: String) -> Unit) {
+
+
+    //val vm: WaterLevelViewModel = hiltViewModel()
+    //val items by vm.levels.collectAsState()
+    //Log.d("shanky",items.toString())
 
     var  percent: Float = sensor?.distance ?: 0f
     var borderColor: Color = Color(0xFF1F2937)
