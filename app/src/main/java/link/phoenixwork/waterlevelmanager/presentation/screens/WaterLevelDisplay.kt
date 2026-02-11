@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.material3.Text
 import androidx.compose.ui.Alignment
 import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -30,11 +31,11 @@ import link.phoenixwork.waterlevelmanager.data.remote.Sensor
 fun WaterLevelDisplay(modifier: Modifier, onClick: (id: String) -> Unit) {
 
 
-    //val vm: WaterLevelViewModel = hiltViewModel()
-    //val items by vm.levels.collectAsState()
-    //Log.d("shanky",items.toString())
+    val vm: WaterLevelViewModel = hiltViewModel()
+    val items by vm.levels.collectAsState()
+    Log.d("shanky-level",items.toString())
 
-    var  percent: Float = 10f
+    var  percent: Float = items?.level?.toFloat() ?: 10f
     var borderColor: Color = Color(0xFF1F2937)
     var waterColor: Color = Color(0xFF3B82F6)
     var backgroundColor: Color = Color(0xFFE5E7EB)
@@ -91,10 +92,18 @@ fun WaterLevelDisplay(modifier: Modifier, onClick: (id: String) -> Unit) {
             )
         }
 
-
-        OutlinedButton(onClick = { onClick("2") }) {
-            Text("hello")
+        Column {
+            OutlinedButton(onClick = { onClick("2") }) {
+                Text("hello")
+            }
+            OutlinedButton(onClick = { vm.add(39F) }) {
+                Text("Upddate Level")
+            }
+            OutlinedButton(onClick = { vm.add(79F) }) {
+                Text("Upddate Level")
+            }
         }
+
     }
 
 }

@@ -46,12 +46,12 @@ fun WaterLevelScreen(
     val items by vm.levels.collectAsState()
 
     Column {
-        Button(onClick = { vm.add(50) }) { Text("Insert level=50") }
+        Button(onClick = { vm.add(50F) }) { Text("Insert level=50") }
         Button(onClick = { vm.clear() }) { Text("Clear") }
 
-        items.forEach {
+        /*items.forEach {
             Text("Level=${it.level}, time=${it.timestampMillis}")
-        }
+        }*/
     }
 }
 

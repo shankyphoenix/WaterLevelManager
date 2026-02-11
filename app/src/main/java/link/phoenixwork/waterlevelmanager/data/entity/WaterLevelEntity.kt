@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "water_levels")
 data class WaterLevelEntity(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
-    val level: Int,
+    val level: Float,
     val timestampMillis: Long = System.currentTimeMillis()
 )

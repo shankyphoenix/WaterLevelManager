@@ -24,7 +24,8 @@ import javax.inject.Inject
 @HiltViewModel
 class UserViewModel @Inject constructor(
     private val repo: SensorRepo,
-    private val authRepo: AuthRepo
+    private val authRepo: AuthRepo,
+    private val tokenStorage: TokenStorage
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(LoginUiState())
@@ -56,6 +57,8 @@ class UserViewModel @Inject constructor(
                 // optionally: save token from response.token
                 Log.d("shanky",response.toString())
                 if(response.success){
+
+                    response.token?.let(tokenStorage::saveToken)
                     _uiState.update { it.copy(isLoggedIn = true) }
                     _events.emit(LoginUiEvent.NavigateHome)
                 } else {
