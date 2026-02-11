@@ -22,6 +22,8 @@ class WaterLevelViewModel @Inject constructor(
         repo.observeAll()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())
 
+
+
     fun add(level: Int) = viewModelScope.launch {
         repo.addLevel(level)
         Log.d("shanky","added")

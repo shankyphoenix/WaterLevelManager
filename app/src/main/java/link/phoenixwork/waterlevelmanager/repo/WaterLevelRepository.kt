@@ -11,12 +11,11 @@ class WaterLevelRepository @Inject constructor(
 ) {
     fun observeAll(): Flow<List<WaterLevelEntity>> = dao.observeAll()
 
+    fun getFirst(): Flow<WaterLevelEntity?> = dao.getFirst()
+
     suspend fun addLevel(level: Int) {
         dao.insert(WaterLevelEntity(level = level))
     }
-
-    suspend fun getFirst():Flow<WaterLevelEntity?> = dao.getFirst()
-
 
     suspend fun clear() = dao.clear()
 }

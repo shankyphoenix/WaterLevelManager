@@ -10,17 +10,17 @@ import link.phoenixwork.waterlevelmanager.presentation.screens.LoginScreen
 import link.phoenixwork.waterlevelmanager.presentation.screens.WaterLevelDisplay
 
 @Composable
-fun AppNavController(sensor: Sensor?, modifier: Modifier) {
+fun AppNavController(modifier: Modifier) {
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "test") {
         composable("test") {
-            LoginScreen( "First Screen",modifier) { id ->
+            LoginScreen( modifier) { id ->
                 navController.navigate("test2")
             }
         }
         composable("test2") {
-            WaterLevelDisplay ("Second Screen",sensor,modifier){ id ->
+            WaterLevelDisplay (modifier){ id ->
                 navController.navigate("test")
             }
         }

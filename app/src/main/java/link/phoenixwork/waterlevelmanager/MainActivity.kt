@@ -28,31 +28,11 @@ import link.phoenixwork.waterlevelmanager.ui.theme.WaterLevelManagerTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
         enableEdgeToEdge()
         setContent {
-
-            val vm: UserViewModel = hiltViewModel()
-
-            val sensor by vm.sensor.collectAsStateWithLifecycle()
-
-
-            LaunchedEffect(Unit) {
-                Log.d("shanky-OnLaunched", sensor.toString());
-                vm.loadUsers() // 🔥 API call here
-                Log.d("shanky-OnLaunched", sensor.toString());
-            }
-
-            LaunchedEffect(sensor) {
-                Log.d("sensor", sensor.toString())
-            }
-
-            //WaterLevelScreen()
-
             WaterLevelManagerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AppNavController(sensor, modifier = Modifier.padding(innerPadding))
+                    AppNavController(modifier = Modifier.padding(innerPadding))
                 }
             }
         }

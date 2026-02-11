@@ -27,14 +27,14 @@ import link.phoenixwork.waterlevelmanager.WaterLevelViewModel
 import link.phoenixwork.waterlevelmanager.data.remote.Sensor
 
 @Composable
-fun WaterLevelDisplay(name: String, sensor: Sensor?, modifier: Modifier, onClick: (id: String) -> Unit) {
+fun WaterLevelDisplay(modifier: Modifier, onClick: (id: String) -> Unit) {
 
 
     //val vm: WaterLevelViewModel = hiltViewModel()
     //val items by vm.levels.collectAsState()
     //Log.d("shanky",items.toString())
 
-    var  percent: Float = sensor?.distance ?: 0f
+    var  percent: Float = 10f
     var borderColor: Color = Color(0xFF1F2937)
     var waterColor: Color = Color(0xFF3B82F6)
     var backgroundColor: Color = Color(0xFFE5E7EB)
@@ -93,7 +93,7 @@ fun WaterLevelDisplay(name: String, sensor: Sensor?, modifier: Modifier, onClick
 
 
         OutlinedButton(onClick = { onClick("2") }) {
-            Text(name)
+            Text("hello")
         }
     }
 
