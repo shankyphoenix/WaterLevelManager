@@ -9,7 +9,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -31,8 +33,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WaterLevelManagerTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    AppNavController(modifier = Modifier.padding(innerPadding))
+                // Surface ensures the background color changes in Dark Mode
+                Surface (
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+                        AppNavController(modifier = Modifier.padding(innerPadding))
+                    }
                 }
             }
         }
@@ -43,16 +50,9 @@ class MainActivity : ComponentActivity() {
 fun WaterLevelScreen(
     vm: WaterLevelViewModel = hiltViewModel()
 ) {
-    val items by vm.levels.collectAsState()
 
-    Column {
-        Button(onClick = { vm.add(50F) }) { Text("Insert level=50") }
-        Button(onClick = { vm.clear() }) { Text("Clear") }
 
-        /*items.forEach {
-            Text("Level=${it.level}, time=${it.timestampMillis}")
-        }*/
-    }
+
 }
 
 @Composable
